@@ -1,0 +1,217 @@
+import { Player, WeeklyPlan, DailyPlan, RealizedLog } from "./types";
+
+export const INITIAL_PLAYERS: Player[] = [
+  {
+    id: "p1",
+    name: "Ahmet Yılmaz",
+    rtpStage: "Aşama 3: Agility/Yön Değiştirme",
+    vasPain: 0,
+    asymmetry: 8.5,
+    hqRatio: 0.65,
+    nordbordDrop: 5.0,
+    
+    // PDF Section 2 Device metrics
+    rsi_modified: 0.45,
+    ecc_decel_impulse_asym: 8.5,
+    rfd_0_200ms: 6200,
+    nordbord_peak_force_asym: 7.0,
+    nordbord_peak_force_total: 380,
+    add_abd_ratio: 1.05,
+    groin_peak_force_asym: 6.5,
+    hq_ratio_60: 0.65,
+    quad_peak_torque_bw: 3.4,
+
+    // Bi-Weekly neuromuscular metrics
+    eccentricBrakingAsymmetry: 8.5,
+    rsiModified: 0.45,
+    hamstringAsymmetry: 7.0,
+    hamstringPeakForce: 380,
+    adductionsAbductionsRatio: 1.05,
+    quadricepsPeakTorque: 250,
+    hamstringPeakTorque: 162,
+    quadricepsPeakTorque180: 170,
+    hamstringPeakTorque180: 120,
+    quadricepsPeakTorque300: 110,
+    hamstringPeakTorque300: 88,
+    hqRatio60: 0.65,
+    hqRatio180: 0.71,
+    hqRatio300: 0.80,
+  },
+  {
+    id: "p2",
+    name: "Mehmet Demir",
+    rtpStage: "Aşama 2: Düz Koşu",
+    vasPain: 2,
+    asymmetry: 12.0,
+    hqRatio: 0.58,
+    nordbordDrop: 8.0,
+
+    // PDF Section 2 Device metrics
+    rsi_modified: 0.38,
+    ecc_decel_impulse_asym: 12.0,
+    rfd_0_200ms: 5100,
+    nordbord_peak_force_asym: 11.5,
+    nordbord_peak_force_total: 310,
+    add_abd_ratio: 0.95,
+    groin_peak_force_asym: 12.0,
+    hq_ratio_60: 0.58,
+    quad_peak_torque_bw: 2.8,
+
+    // Bi-Weekly neuromuscular metrics
+    eccentricBrakingAsymmetry: 12.0,
+    rsiModified: 0.38,
+    hamstringAsymmetry: 11.5,
+    hamstringPeakForce: 310,
+    adductionsAbductionsRatio: 0.95,
+    quadricepsPeakTorque: 220,
+    hamstringPeakTorque: 128,
+    quadricepsPeakTorque180: 150,
+    hamstringPeakTorque180: 96,
+    quadricepsPeakTorque300: 95,
+    hamstringPeakTorque300: 68,
+    hqRatio60: 0.58,
+    hqRatio180: 0.64,
+    hqRatio300: 0.72,
+  },
+  {
+    id: "p3",
+    name: "Can Ercan",
+    rtpStage: "Aşama 1: Klinik",
+    vasPain: 4,
+    asymmetry: 18.0,
+    hqRatio: 0.52,
+    nordbordDrop: 16.0,
+
+    // PDF Section 2 Device metrics
+    rsi_modified: 0.29,
+    ecc_decel_impulse_asym: 18.0,
+    rfd_0_200ms: 4200,
+    nordbord_peak_force_asym: 17.5,
+    nordbord_peak_force_total: 260,
+    add_abd_ratio: 0.80,
+    groin_peak_force_asym: 16.0,
+    hq_ratio_60: 0.52,
+    quad_peak_torque_bw: 2.2,
+
+    // Bi-Weekly neuromuscular metrics
+    eccentricBrakingAsymmetry: 18.0,
+    rsiModified: 0.29,
+    hamstringAsymmetry: 17.5,
+    hamstringPeakForce: 260,
+    adductionsAbductionsRatio: 0.80,
+    quadricepsPeakTorque: 200,
+    hamstringPeakTorque: 104,
+    quadricepsPeakTorque180: 130,
+    hamstringPeakTorque180: 75,
+    quadricepsPeakTorque300: 80,
+    hamstringPeakTorque300: 51,
+    hqRatio60: 0.52,
+    hqRatio180: 0.58,
+    hqRatio300: 0.64,
+  }
+];
+
+export const INITIAL_WEEKLY_PLANS: WeeklyPlan[] = [
+  {
+    id: "wp1",
+    playerId: "p1",
+    weekNo: "2026-Haziran / Hafta 4 - RTP Faz 3",
+    focus: "Nöromüsküler Güç / Hız",
+    mon: "Gym: Eksantrik Odak + Saha: Doğrusal Koşular",
+    tue: "Saha: Geniş Alan Oyunları (Hedef Yüksek Mesafe)",
+    wed: "RECOVERY / Klinik Restorasyon",
+    thu: "Gym: Güç/RFD + Saha: Dar Alan Oyunları (İvmelenme)",
+    fri: "Saha: Taktik + Sprint Aktivasyonu",
+    sat: "MAÇGÜNÜ / Maksimal Yüklenme Simülasyonu",
+    sun: "OFF / Dinlenme",
+    targetHsr: 1500,
+    createdAt: "2026-06-25T10:00:00Z"
+  },
+  {
+    id: "wp2",
+    playerId: "p2",
+    weekNo: "2026-Haziran / Hafta 4 - RTP Faz 2",
+    focus: "Kuvvet & Hipertrofi",
+    mon: "Gym: Hipertrofi Hamstring/Quad odaklı",
+    tue: "Saha: Düşük Hızlı Sürekli Koşular (20 dk)",
+    wed: "Saha: Mobilizasyon & Core + Bisiklet Ergosu",
+    thu: "Gym: İzometrik Kuvvet + Saha: Kısa Driller",
+    fri: "Klinik Tedavi & Masaj",
+    sat: "Saha: Temel Teknik Driller + Hafif Koşu",
+    sun: "OFF / Dinlenme",
+    targetHsr: 600,
+    createdAt: "2026-06-25T11:00:00Z"
+  }
+];
+
+export const INITIAL_DAILY_PLANS: DailyPlan[] = [
+  {
+    id: "dp1",
+    playerId: "p1",
+    date: "2026-06-30",
+    type: "Kombine (Saha + Gym)",
+    warmup: "10 dk RAMP Isınma: Dinamik Esnemeler, Kalça Mobilizasyonu",
+    coreActivation: "Anti-rotasyonel Paloff Press 3x10, Deadbug 3x12, Glute Bridge 3x15",
+    plyoSaq: "Hurdle Jump (Frenlemeli) 3x4, Merdiven Ayak Çalışmaları, Kısa Reaktif Çıkışlar",
+    resistance: "Trapbar Deadlift 3x5 (%80 1RM - Eksantrik Odak), Bulgar Split Squat 3x6",
+    energyProtocol: "Aerobik Güç Gelişimi: 4x60m Progresif İlerleyen Koşular (Giderek Artan Hız)",
+    targetDistance: 4500,
+    targetHsr: 300,
+    targetRpe: 6
+  },
+  {
+    id: "dp2",
+    playerId: "p2",
+    date: "2026-06-30",
+    type: "Saha İdmanı",
+    warmup: "12 dk Fonksiyonel Isınma: Jogging, Adductor ve Quadriceps Dinamik Germe",
+    coreActivation: "Plank Varyasyonları (Side Plank dahil) 3x30 sn, Bird-Dog Aktivasyonu",
+    plyoSaq: "Lineer İvmelenme Drilleri 3x15m, Mini Engel Sıçramaları 3x6",
+    resistance: "Kendi Vücut Ağırlığı ile Eksantrik Hamstring Slider Köprüsü 3x5",
+    energyProtocol: "Ekstansif Dayanıklılık Protokolü: 4x400m Düz Koşu (Hedef Tempo: 70 sn/tur)",
+    targetDistance: 3200,
+    targetHsr: 100,
+    targetRpe: 4
+  }
+];
+
+export const INITIAL_REALIZED_LOGS: RealizedLog[] = [
+  {
+    id: "rl1",
+    playerId: "p1",
+    date: "2026-06-29",
+    rtpStage: "Aşama 3: Agility/Yön Değiştirme",
+    actualDistance: 4300,
+    actualHsr: 280,
+    actualRpe: 6,
+    vasPain: 0,
+    createdAt: "2026-06-29T18:00:00Z",
+    vas_pain_score: 0,
+    session_rpe: 6,
+    daily_training_duration: 60,
+    sRPE: 360,
+    sleep_score: 4,
+    fatigue_score: 4,
+    stress_score: 5,
+    wellness_score: 4.33,
+  },
+  {
+    id: "rl2",
+    playerId: "p2",
+    date: "2026-06-29",
+    rtpStage: "Aşama 2: Düz Koşu",
+    actualDistance: 3000,
+    actualHsr: 80,
+    actualRpe: 4,
+    vasPain: 2,
+    createdAt: "2026-06-29T18:15:00Z",
+    vas_pain_score: 2,
+    session_rpe: 4,
+    daily_training_duration: 45,
+    sRPE: 180,
+    sleep_score: 3,
+    fatigue_score: 3,
+    stress_score: 3,
+    wellness_score: 3.0,
+  }
+];
